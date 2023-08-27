@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,19 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',    
-    'authentication',
-    'channels'
+    'authentication'
 ]
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.RedisChannelLayer",
-        "CONFIG": {
-            # Configure your Redis settings here
-            "hosts": [("127.0.0.1", 6379)],
-        },
-    },
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -97,8 +88,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'code_editor_backend.wsgi.application'
+# ASGI_APPLICATION = 'code_editor_backend.asgi.application'
 
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            # Configure your Redis settings here
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 

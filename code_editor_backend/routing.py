@@ -1,7 +1,13 @@
-from django.urls import re_path
+# myproject/routing.py
+from django.urls import path
+from authentication.consumers import SocketConsumer
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
 
-from . import consumers
-
-websocket_urlpatterns = [
-    re_path(r'ws/connect/$', consumers.MyConsumer.as_asgi()),
-]
+application = ProtocolTypeRouter({
+    "websocket": AuthMiddlewareStack(
+        URLRouter([
+            path("socket.io/", SocketConsumer.as_asgi()),
+        ])
+    ),
+})
