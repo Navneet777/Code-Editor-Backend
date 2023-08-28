@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-_^_4b1k_z)h%e3&-z!6wge(7kxek0k7gw_f7(8qg+b5t8)3o9*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,8 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
-    'authentication',
-    'channels'
+    'authentication'
 
 ]
 
@@ -86,18 +86,18 @@ TEMPLATES = [
         },
     },
 ]
+ASGI_APPLICATION = 'code_editor_backend.asgi.application'  # Replace with your ASGI application path
 
 # WSGI_APPLICATION = 'code_editor_backend.wsgi.application'
-ASGI_APPLICATION = 'code_editor_backend.asgi.application'  # Replace with your ASGI application path
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            # Configure your Redis settings here
-            "hosts": [("localhost", 6379)],
-        },
-    },
-}
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             # Configure your Redis settings here
+#             "hosts": [("localhost", 6379)],
+#         },
+#     },
+# }
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -112,6 +112,15 @@ DATABASES = {
     }
 }
 
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://localhost:6379/1",  # Use the service name "redis"
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
 
 
 # Password validation
