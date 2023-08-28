@@ -31,8 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'rest_framework.authtoken',    
-    'authentication'
+    'rest_framework.authtoken',
+    'authentication',
+    'channels'
+
 ]
 
 MIDDLEWARE = [
@@ -87,15 +87,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'code_editor_backend.wsgi.application'
-# ASGI_APPLICATION = 'code_editor_backend.asgi.application'
-
+# WSGI_APPLICATION = 'code_editor_backend.wsgi.application'
+ASGI_APPLICATION = 'code_editor_backend.asgi.application'  # Replace with your ASGI application path
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             # Configure your Redis settings here
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [("localhost", 6379)],
         },
     },
 }
